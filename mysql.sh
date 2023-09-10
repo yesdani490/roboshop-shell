@@ -35,7 +35,7 @@ yum module disable mysql -y &>>$LOGFILE
  cp /home/centos/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo &>>$LOGFILE
  VALIDATE $? 'creating mysql.repo'
 
- yum install mysql-community-server -y
+ yum install mysql-community-server -y &>>$LOGFILE
 
  VALIDATE $? 'Installing mysql'
 
