@@ -80,7 +80,11 @@ VALIDATE $? 'Copying payment service'
 systemctl daemon-reload &>>$LOGFILE
 VALIDATE $? 'Daemon reload'
 
+systemctl unmask payment &>>$LOGFILE
+VALIDATE $? 'Unmasking payment service'
+
 systemctl enable payment &>>$LOGFILE
 VALIDATE $? 'Enabling payment'
+
 systemctl start payment &>>$LOGFILE
 VALIDATE $? 'starting payment'
