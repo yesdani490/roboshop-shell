@@ -65,34 +65,47 @@ else
 fi
 
 
-curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>>$LOGFILE
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>>$LOGFILE
 
-VALIDATE $? 'Downloading cart Artifact'
+VALIDATE $? 'Downloading user Artifact'
 
 cd /app || exit &>>$LOGFILE
 
 VALIDATE $? 'moving to /app directory'
 
-unzip /tmp/cart.zip &>>$LOGFILE
+unzip /tmp/user.zip &>>$LOGFILE
 
-VALIDATE $? 'Unzipping cart'
+VALIDATE $? 'Unzipping user'
 
 npm install &>>$LOGFILE
 
 VALIDATE $? 'Installing dependencies'
 
-cp /home/centos/roboshop-shell/cart.service /etc/systemd/system/cart.service &>>$LOGFILE
+cp /home/centos/roboshop-shell/user.service /etc/systemd/system/user.service &>>$LOGFILE
 
-VALIDATE $? 'copying cart.service'
+VALIDATE $? 'copying user.service'
 
 systemctl daemon-reload &>>$LOGFILE
 
 VALIDATE $? 'daemon reloading'
 
-systemctl enable cart &>>$LOGFILE
+systemctl enable user &>>$LOGFILE
 
-VALIDATE $? 'enabling cart'
+VALIDATE $? 'enabling user'
 
-systemctl start cart &>>$LOGFILE
+systemctl start user &>>$LOGFILE
 
-VALIDATE $? 'enabling cart'
+VALIDATE $? 'enabling user'
+
+cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
+
+VALIDATE $? 'copying mongorepo'
+
+yum install mongodb-org-shell -y &>>$LOGFILE
+
+VALIDATE $? 'Installing mongo client'
+
+
+mongo --host mongodb.joindevops.top </app/schema/user.js &>>$LOGFILE
+
+VALIDATE $? 'Loading user data.'
