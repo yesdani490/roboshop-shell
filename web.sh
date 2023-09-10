@@ -39,7 +39,7 @@ systemctl start nginx &>>$LOGFILE
 VALIDATE $? 'Starting Nginx'
 
 rm -rf /usr/share/nginx/html/* &>>$LOGFILE
-VALIDATE $? 'Removing default nginx file'
+VALIDATE $? 'Removing the default nginx file'
 
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$LOGFILE
 VALIDATE $? 'Downloading Web artifact'
@@ -51,5 +51,3 @@ VALIDATE $? 'Copying Roboshop config '
 
 systemctl restart nginx &>>$LOGFILE
 VALIDATE $? 'Restarting Nginx'
-
-
