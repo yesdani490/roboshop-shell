@@ -23,7 +23,7 @@ VALIDATE(){
    if [ "$1" -ne 0 ];
       then
         echo -e " $2....$R Failure $N"
-        exit 1
+    
       else 
       echo -e "   $2 .... $G Success $N"
    fi
@@ -44,6 +44,8 @@ VALIDATE $? 'Removing the default nginx file'
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>>$LOGFILE
 VALIDATE $? 'Downloading Web artifact'
 
+cd /usr/share/nginx/html ||exit  &>>$LOGFILE
+VALIDATE $? 'moving to default HTML Directory'
 unzip /tmp/web.zip
 VALIDATE $? 'Unzipping web artifact'
 cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf  &>>$LOGFILE
