@@ -38,7 +38,7 @@ read roboshop
 id "$roboshop" 
 if [ $? -eq 0 ]; then
   echo "User '$roboshop' exists."
-  exit 1
+  
 else
   echo "User '$roboshop' does not exist so adding user."
   sudo useradd $roboshop
