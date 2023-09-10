@@ -32,7 +32,7 @@ VALIDATE(){
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash &>>$LOGFILE
 VALIDATE $? 'Downloading repo'
 
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | basn &>>$LOGFILE
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash &>>$LOGFILE
 VALIDATE $? 'Downloading rabbitmq '
 
 yum install rabbitmq-server -y &>>$LOGFILE
