@@ -32,7 +32,7 @@ VALIDATE(){
 yum module disable mysql -y &>>$LOGFILE
  VALIDATE $? 'Disabling mysql'
 
- cp /home/centos/roboshop-shell/mysql.rep /etc/yum.repos.d/mysql.repo &>>$LOGFILE
+ cp /home/centos/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo &>>$LOGFILE
  VALIDATE $? 'creating mysql.repo'
 
  yum install mysql-community-server -y
