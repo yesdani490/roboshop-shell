@@ -1,0 +1,8 @@
+#!/bin/bash
+
+Name=("mongodb" "mysql" "cart" "catalogue" "redis" "shipping" "dispatch" "web" "payment" "user")
+
+for i in "${Name[@]}"
+do
+ echo "creating instance $i"
+done
