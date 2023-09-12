@@ -19,16 +19,34 @@ for i in "${Name[@]}"
  echo "creating instance $i $IpAddress"
 
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONE --change-batch file "
-{
-                " Comment ": " CREATE/DELETE/UPDATE ",
-                 " Changes ": [ {
-                             " Action ": " CREATE ",
-                            " ResourceRecordSet ": {
-                                " Name ": " $i.$DOMAIN_NAME ",
-                                    " Type ": " A ",
-                                     " TTL ": 300,
-                                  " ResourceRecords ": [{" Value ": " $IpAddress "}]
-                            }},
-"
- 
+# {
+#                 " Comment ": " CREATE ",
+#                  " Changes ": [ {
+#                              " Action ": " CREATE ",
+#                             " ResourceRecordSet ": {
+#                                 " Name ": " $i.$DOMAIN_NAME ",
+#                                     " Type ": " A ",
+#                                      " TTL ": 300,
+#                                   " ResourceRecords ": [{" Value ": " $IpAddress "}]
+#                             }},
+# "
+ aws route53 change-resource-record-sets --hosted-zone-id "$HOSTEDZONE" --change-batch "{
+  \"Comment\": \"CREATE\",
+  \"Changes\": [
+    {
+      \"Action\": \"CREATE\",
+      \"ResourceRecordSet\": {
+        \"Name\": \"$i.$DOMAIN_NAME\",
+        \"Type\": \"A\",
+        \"TTL\": 300,
+        \"ResourceRecords\": [
+          {
+            \"Value\": \"$IpAddress\"
+          }
+        ]
+      }
+    }
+  ]
+}"
+
 done
