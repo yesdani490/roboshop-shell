@@ -15,7 +15,7 @@ for i in "${Name[@]}"
        INSTACETYPE="t2.micro"
  fi
 
- IpAddress=$(aws ec2 run-instances --image-id $IMAGEID --count 1 --instance-type $INSTACETYPE --security-group-ids $SECURITYGROUGID --tag-specifications "ResourceType=instance,Tags=[{Key=webserver,Value=$i}]" | jq -r '.Instance[0].PrivateIpAdress')
+ IpAddress=$(aws ec2 run-instances --image-id $IMAGEID --count 1 --instance-type $INSTACETYPE --security-group-ids $SECURITYGROUGID --tag-specifications "ResourceType=instance,Tags=[{Key=webserver,Value=$i}]" | jq -r '.Instances[0].PrivateIpAddress')
  echo "creating instance $i $IpAddress"
 
 aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONE --change-batch file "
