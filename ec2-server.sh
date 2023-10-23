@@ -1,5 +1,5 @@
 #!/bin/bash
-Names=$*
+Names=$@
 IMAGEID=ami-03265a0778a880afb 
 SECURITYGROUGID=sg-08105091605f3144d 
 INSTACETYPE=""
