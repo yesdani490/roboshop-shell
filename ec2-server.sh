@@ -1,11 +1,11 @@
 #!/bin/bash
-Names=$@
+Names=$*
 IMAGEID=ami-03265a0778a880afb 
 SECURITYGROUGID=sg-08105091605f3144d 
 INSTACETYPE=""
 HOSTEDZONE=Z05740803UNSE6BOTDZEC
 DOMAIN_NAME=joindevops.top
-for i in '$@'
+for i in "$@"
 do
   if [[ $i == "mongo" || $i == "mysql" ]]
   then 
